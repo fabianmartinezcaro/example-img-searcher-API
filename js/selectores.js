@@ -5,5 +5,6 @@ export const inputBusqueda = document.querySelector('#termino');
 // RESULTADOS
 export const resultado = document.querySelector('#resultado');
 
-
+// PAGINACIÓN
+export const paginacion = document.querySelector('#paginacion')
 
