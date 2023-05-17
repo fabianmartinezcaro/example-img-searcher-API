@@ -2,19 +2,26 @@ import { resultado } from "../selectores.js";
 
 export default class UI{
 
-    mostrarResultados(imagenes = []){
+    mostrarResultados(imagenes){
 
         this.limpiarHTML(resultado);
 
         imagenes.forEach(imagen => {
 
             console.log(imagen)
+            const {comments, downloads, likes, views, largeImageURL, previewURL} = imagen;
 
-            const contenedorImagenes = document.createElement('DIV');
-            contenedorImagenes.classList.add('grid', 'grid-cols-4', 'gap-4');
-
-            const cardImagen = document.createElement('DIV');
-            
+            resultado.innerHTML += `
+                <div class="w-1/2 md:w-1/3 lg:w-1/4">
+                    <div class="m-4 p-2 border-2 border-gray-800">
+                        <img class="w-full border-1 border-gray-800" src="${previewURL}">
+                        <div class="flex flex-row space-x-2 text-sm">
+                            <p class="font-medium text-gray-600"><span class="font-bold text-blue-600">${likes}</span> Me Gustas</p>
+                            <p class="font-medium text-gray-600"><span class="font-bold text-blue-600">${comments}</span> Comments</p>
+                        </div>
+                    </div>
+                </div>
+            `    
 
         });
     }
