@@ -1,4 +1,9 @@
 body {
-  background-color:#171219;
+  background-color:#eeee;
   
+}
+
+button{
+  text-decoration: none;
+  outline: none;
 }
