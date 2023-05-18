@@ -4,7 +4,6 @@ import UI from "./classes/UI.js";
 const ui = new UI();
 const registroPorPagina = 40;
 export let totalPaginas;
-export let iterador;
 
 export function validarBusqueda(evento){
     evento.preventDefault();
@@ -18,6 +17,7 @@ export function validarBusqueda(evento){
 
 }
 
+
 export function cargarBusqueda(){
     
     const key = '36357379-ccb5b718001fdd5c4fa0f30d8';
@@ -27,23 +27,25 @@ export function cargarBusqueda(){
         .then(respuesta => respuesta.json())
         .then(resultado => {
             totalPaginas = calcularPaginas(resultado.totalHits);
-            ui.mostrarResultados(resultado.hits)
+            ui.mostrarResultados(resultado.hits);
         })
 }
 
+
 // Generador que va a registrar la cantidad de elementos de acuerdo a las páginas
-export function *generadorPaginas(total){
-    for(let i = 1; i <= total; i++){
+export function *generadorPaginas(totalPaginas){
+    for(let i = 1; i <= totalPaginas; i++){
         yield i;
     }
 }
 
+
 export function calcularPaginas(total){
-    return parseInt(Math.ceil(total / registroPorPagina))
+    return parseInt(Math.ceil(total / registroPorPagina));
 }
 
 
-// Agrega la el simbolo K en números con valores grandes EJ: 12.2k
+// Agrega el simbolo K en números con valores grandes EJ: 12.2k
 export function numsToK(numero){
     if(numero > 10000){
         let resultado = numero / 10000;

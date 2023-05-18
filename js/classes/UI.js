@@ -1,5 +1,7 @@
 import { paginacion, resultado } from "../selectores.js";
-import { generadorPaginas, iterador, numsToK, totalPaginas } from "../funciones.js";
+import { generadorPaginas, numsToK, totalPaginas } from "../funciones.js";
+
+let iterador;
 
 export default class UI{
 
@@ -47,7 +49,7 @@ export default class UI{
     }
 
     imprimirPaginador(){
-        iterador = generadorPaginas(totalPaginas);
+        iterador = generadorPaginas(totalPaginas)
 
         while(true){
             const {value, done} = iterador.next();
@@ -58,9 +60,9 @@ export default class UI{
             numerador.href = '#';
             numerador.dataset.pagina = value;
             numerador.textContent = value;
-            numerador.classList.add('siguiente', 'bg-white', 'border-1', 'border-black', 'font-bold', 'text-sm', 'mb-10')
+            numerador.classList.add('siguiente', 'bg-white', 'border-1', 'border-black', 'font-bold', 'text-sm', 'mb-10');
 
-            paginacion.appendChild(numerador)
+            paginacion.appendChild(numerador);
         }
 
     }
