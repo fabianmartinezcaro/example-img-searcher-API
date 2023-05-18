@@ -1,4 +1,4 @@
-import { cargarBusqueda, validarBusqueda } from "../funciones.js";
+import { validarBusqueda } from "../funciones.js";
 import { formulario } from "../selectores.js";
 
 

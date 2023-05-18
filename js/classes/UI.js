@@ -1,4 +1,5 @@
-import { resultado } from "../selectores.js";
+import { paginacion, resultado } from "../selectores.js";
+import { generadorPaginas, iterador, numsToK, totalPaginas } from "../funciones.js";
 
 export default class UI{
 
@@ -8,20 +9,7 @@ export default class UI{
 
         imagenes.forEach(imagen => {
 
-            console.log(imagen)
-            const {comments, downloads, likes, views, largeImageURL, previewURL} = imagen;
-
-            function numsToK(numero){
-                if(numero > 10000){
-                    let resultado = numero / 10000;
-                    resultado = resultado.toFixed(1) + 'k';
-                    return resultado;
-                }
-            }
-
-            function redirigiendo(){
-                
-            }
+            const {downloads, likes, views, largeImageURL, previewURL} = imagen;
 
             resultado.innerHTML += `
                 <div class="w-full md:w-1/2 lg:w-1/4">
@@ -40,9 +28,9 @@ export default class UI{
                         </div>
 
                         <div class="flex justify-center space-x-2 pb-4">
-                            <button class="focus:outline-none hover:bg-blue-800 duration-100 rounded-md bg-blue-600 text-white text-sm mt-4 py-1 px-4" href="_blank">Descargar</button>
+                            <button class="focus:outline-none hover:bg-blue-800 duration-100 rounded-sm bg-blue-600 text-white text-sm mt-4 py-1 px-4" href="_blank">Descargar</button>
                             <a 
-                                class="focus:outline-none hover:bg-blue-800 duration-100 hover:duration-100 rounded-md bg-gray-600 text-white text-sm mt-4 py-1 px-4" 
+                                class="focus:outline-none hover:bg-blue-800 duration-100 hover:duration-100 rounded-sm bg-gray-600 text-white text-sm mt-4 py-1 px-4" 
                                 href="${largeImageURL}" 
                                 target="_blank" 
                                 rel="noopener noreferrer">Ver Imagen
@@ -53,6 +41,28 @@ export default class UI{
             `    
 
         });
+    
+        this.imprimirPaginador();
+
+    }
+
+    imprimirPaginador(){
+        iterador = generadorPaginas(totalPaginas);
+
+        while(true){
+            const {value, done} = iterador.next();
+            if(done) return;
+
+            // Caso contrario genera botones para el paginador
+            const numerador = document.createElement('A');
+            numerador.href = '#';
+            numerador.dataset.pagina = value;
+            numerador.textContent = value;
+            numerador.classList.add('siguiente', 'bg-white', 'border-1', 'border-black', 'font-bold', 'text-sm', 'mb-10')
+
+            paginacion.appendChild(numerador)
+        }
+
     }
 
 
