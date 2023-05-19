@@ -26,6 +26,7 @@ export function cargarBusqueda(){
     fetch(URL)
         .then(respuesta => respuesta.json())
         .then(resultado => {
+            console.log(resultado.hits)
             totalPaginas = calcularPaginas(resultado.totalHits);
             ui.mostrarResultados(resultado.hits);
         })

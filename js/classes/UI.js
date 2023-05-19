@@ -44,6 +44,8 @@ export default class UI{
 
         });
     
+        this.limpiarHTML(paginacion)
+
         this.imprimirPaginador();
 
     }
@@ -60,7 +62,7 @@ export default class UI{
             numerador.href = '#';
             numerador.dataset.pagina = value;
             numerador.textContent = value;
-            numerador.classList.add('siguiente', 'bg-white', 'border-1', 'border-black', 'font-bold', 'text-sm', 'mb-10');
+            numerador.classList.add('siguiente', 'bg-white', 'rounded-lg', 'shadow-md', 'font-bold', 'text-sm', 'my-10', 'px-4', 'py-1', 'mx-2');
 
             paginacion.appendChild(numerador);
         }
@@ -97,7 +99,7 @@ export default class UI{
 
     limpiarHTML(contenedor){
         while(contenedor.firstChild){
-            contenedor.remove(contenedor.firstChild);
+            contenedor.removeChild(contenedor.firstChild);
         }
     }
 
