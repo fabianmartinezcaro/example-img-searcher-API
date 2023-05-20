@@ -1,5 +1,5 @@
 import { inputBusqueda } from "./selectores.js";
-import UI from "./classes/UI.js";
+import UI, { paginaActual } from "./classes/UI.js";
 
 const ui = new UI();
 const registroPorPagina = 40;
@@ -21,7 +21,7 @@ export function validarBusqueda(evento){
 export function cargarBusqueda(){
     
     const key = '36357379-ccb5b718001fdd5c4fa0f30d8';
-    const URL = `https://pixabay.com/api/?key=${key}&q=${inputBusqueda.value}&per_page=${registroPorPagina}`;
+    const URL = `https://pixabay.com/api/?key=${key}&q=${inputBusqueda.value}&per_page=${registroPorPagina}&page=${paginaActual}`;
 
     fetch(URL)
         .then(respuesta => respuesta.json())

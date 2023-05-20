@@ -1,7 +1,8 @@
 import { paginacion, resultado } from "../selectores.js";
-import { generadorPaginas, numsToK, totalPaginas } from "../funciones.js";
+import { cargarBusqueda, generadorPaginas, numsToK, totalPaginas } from "../funciones.js";
 
 let iterador;
+export let paginaActual = 1;
 
 export default class UI{
 
@@ -30,9 +31,9 @@ export default class UI{
                         </div>
 
                         <div class="flex justify-center space-x-2 pb-4">
-                            <button class="focus:outline-none hover:bg-blue-800 duration-100 rounded-sm bg-blue-600 text-white text-sm mt-4 py-1 px-4" href="_blank">Descargar</button>
+                            <button class="focus:outline-none hover:bg-green-800 duration-100 rounded-full bg-green-600 text-green-100 font-semibold text-sm mt-4 py-1 px-4" href="_blank">Descargar</button>
                             <a 
-                                class="focus:outline-none hover:bg-blue-800 duration-100 hover:duration-100 rounded-sm bg-gray-600 text-white text-sm mt-4 py-1 px-4" 
+                                class="focus:outline-none hover:bg-blue-800 duration-100 hover:duration-100 rounded-full bg-blue-600 text-blue-100 font-semibold text-sm mt-4 py-1 px-4" 
                                 href="${largeImageURL}" 
                                 target="_blank" 
                                 rel="noopener noreferrer">Ver Imagen
@@ -45,13 +46,12 @@ export default class UI{
         });
     
         this.limpiarHTML(paginacion)
-
         this.imprimirPaginador();
 
     }
 
     imprimirPaginador(){
-        iterador = generadorPaginas(totalPaginas)
+        iterador = generadorPaginas(totalPaginas);
 
         while(true){
             const {value, done} = iterador.next();
@@ -62,9 +62,14 @@ export default class UI{
             numerador.href = '#';
             numerador.dataset.pagina = value;
             numerador.textContent = value;
-            numerador.classList.add('siguiente', 'bg-white', 'rounded-lg', 'shadow-md', 'font-bold', 'text-sm', 'my-10', 'px-4', 'py-1', 'mx-2');
+            numerador.classList.add('mx-2','siguiente', 'bg-white', 'text-gray-600', 'rounded-lg', 'shadow-md', 'font-bold', 'text-sm', 'my-2', 'px-4', 'py-1');
 
-            paginacion.appendChild(numerador);
+            numerador.onclick = () => {
+                paginaActual = value;
+                cargarBusqueda()
+            }
+
+            paginacion.appendChild(numerador);   
         }
 
     }
