@@ -66,7 +66,7 @@ export default class UI{
 
             numerador.onclick = () => {
                 paginaActual = value;
-                cargarBusqueda()
+                cargarBusqueda();
             }
 
             paginacion.appendChild(numerador);   
